@@ -27,3 +27,11 @@ export const doLogin = (username: string, password: string) => {
     }
   );
 };
+
+export const fetchAccount = () => {
+  return axios.get<IBackendRes<IUser>>(`/api/v1/auth/account`, {
+    headers: {
+      delay: 3000,
+    },
+  });
+};
