@@ -3,11 +3,13 @@ import { Button, Divider, Form, Input, App } from "antd";
 import type { FormProps } from "antd";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useCurrentApp } from "@/context/app.context";
 type FieldType = {
   username?: string;
   password?: string;
 };
 const LoginPage = () => {
+  const { setIsAuthenticated, setUser } = useCurrentApp();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { message, notification } = App.useApp();
@@ -17,6 +19,8 @@ const LoginPage = () => {
     const res = await doLogin(username!, password!);
     setIsLoading(false);
     if (res && res.data) {
+      setIsAuthenticated(true);
+      setUser(res.data.user);
       localStorage.setItem("access_token", res.data.access_token);
       navigate("/");
       message.success("Đăng nhập thành công");

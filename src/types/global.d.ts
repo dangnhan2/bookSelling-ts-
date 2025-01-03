@@ -29,4 +29,13 @@ declare global {
       id: string;
     };
   }
+
+  interface IUser {
+    fullName: string;
+    email: string;
+    phone: string;
+    role: string;
+    avatar: string;
+    id: string;
+  }
 }
