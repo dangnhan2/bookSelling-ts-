@@ -1,4 +1,4 @@
-import axios from "services/axios.customize";
+import axios from "./axios.customize";
 export const doRegister = (
   fullName: string,
   email: string,

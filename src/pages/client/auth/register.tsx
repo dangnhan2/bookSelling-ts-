@@ -1,6 +1,8 @@
-import { Button, Checkbox, Divider, Form, Input } from "antd";
+import { doRegister } from "@/services/api";
+import { App, Button, Checkbox, Divider, Form, Input } from "antd";
 import type { FormProps } from "antd";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 type FieldType = {
   fullName?: string;
   password?: string;
@@ -9,8 +11,22 @@ type FieldType = {
 };
 
 const RegisterPage = () => {
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { message, notification } = App.useApp();
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    const { fullName, password, email, phone } = values;
+    const res = await doRegister(fullName!, password!, email!, phone!);
+    if (res && res.data) {
+      navigate("/login");
+      message.success("Đăng ký thành công");
+    } else {
+      notification.error({
+        message: "Đăng ký thất bại",
+        description: res.message,
+        duration: 5,
+      });
+    }
   };
 
   return (

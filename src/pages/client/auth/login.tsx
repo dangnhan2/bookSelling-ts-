@@ -1,13 +1,32 @@
-import { Button, Divider, Form, Input } from "antd";
+import { doLogin } from "@/services/api";
+import { Button, Divider, Form, Input, App } from "antd";
 import type { FormProps } from "antd";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 type FieldType = {
   username?: string;
   password?: string;
 };
 const LoginPage = () => {
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const { message, notification } = App.useApp();
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    const { username, password } = values;
+    setIsLoading(true);
+    const res = await doLogin(username!, password!);
+    setIsLoading(false);
+    if (res && res.data) {
+      localStorage.setItem("access_token", res.data.access_token);
+      navigate("/");
+      message.success("Đăng nhập thành công");
+    } else {
+      notification.error({
+        message: "Đăng nhập thất bại",
+        description: res.message,
+        duration: 5,
+      });
+    }
   };
   return (
     <>
@@ -63,7 +82,7 @@ const LoginPage = () => {
               </Form.Item>
 
               <Form.Item label={null}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" loading={isLoading}>
                   Đăng nhập
                 </Button>
               </Form.Item>
