@@ -5,6 +5,12 @@ import AboutPage from "./pages/client/about";
 import BookPage from "pages/client/book";
 import LoginPage from "./pages/client/auth/login";
 import RegisterPage from "./pages/client/auth/register";
+import ProtectedRoute from "./components/protected/protected";
+import LayoutAdmin from "./components/admin/layoutAdmin";
+import DashBoard from "./components/admin/dashboard";
+import ManageOrder from "./components/admin/manage.order";
+import ManageUser from "./components/admin/manage.user";
+import ManageBook from "./components/admin/manage.book";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,55 +30,60 @@ function App() {
           path: "/book",
           element: <BookPage />,
         },
-        // {
-        //   path: "/checkout",
-        //   element: (
-        //     <ProtectedRoute>
-        //       <div>checkout</div>
-        //     </ProtectedRoute>
-        //   ),
-        // },
       ],
     },
 
-    // {
-    //   path: "/admin",
-    //   element: <LayoutAdmin />,
-    //   children: [
-    //     {
-    //       index: true,
-    //       element: (
-    //         <ProtectedRoute>
-    //           <DashBoard />
-    //         </ProtectedRoute>
-    //       ),
-    //     },
-    //     {
-    //       path: "/admin/book",
-    //       element: (
-    //         <ProtectedRoute>
-    //           <ManageBook />
-    //         </ProtectedRoute>
-    //       ),
-    //     },
-    //     {
-    //       path: "/admin/user",
-    //       element: (
-    //         <ProtectedRoute>
-    //           <ManageUser />
-    //         </ProtectedRoute>
-    //       ),
-    //     },
-    //     {
-    //       path: "/admin/order",
-    //       element: (
-    //         <ProtectedRoute>
-    //           <ManageOrder />
-    //         </ProtectedRoute>
-    //       ),
-    //     },
-    //   ],
-    // },
+    {
+      path: "admin",
+      element: (
+        <ProtectedRoute>
+          <LayoutAdmin />
+        </ProtectedRoute>
+      ),
+      children: [
+        {
+          index: true,
+          element: (
+            <ProtectedRoute>
+              <DashBoard />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/book",
+          element: (
+            <ProtectedRoute>
+              <ManageBook />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/user",
+          element: (
+            <ProtectedRoute>
+              <ManageUser />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/admin/order",
+          element: (
+            <ProtectedRoute>
+              <ManageOrder />
+            </ProtectedRoute>
+          ),
+        },
+      ],
+    },
+
+    {
+      path: "/checkout",
+      element: (
+        <ProtectedRoute>
+          <div>checkout</div>
+        </ProtectedRoute>
+      ),
+    },
 
     {
       path: "/login",

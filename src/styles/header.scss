@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .container_brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 100px;
+      height: 80px;
+    }
+    .brandname {
+      font-size: 1rem;
+      color: #64b7da;
+    }
+  }
+
+  .container_search {
+    width: 40vw;
+  }
+
+  .container_cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container_cart-icon {
+      display: inline;
+      font-size: 25px;
+      color: #64b7da;
+      position: relative;
+      padding: 0 5px;
+    }
+
+    .container_cart-badge {
+      position: absolute;
+      bottom: 55%;
+      right: -10%;
+    }
+  }
+
+  .container_info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+  }
+  .container_name {
+    margin-left: 10px;
+  }
+}

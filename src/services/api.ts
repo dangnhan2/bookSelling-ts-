@@ -35,3 +35,7 @@ export const fetchAccount = () => {
     },
   });
 };
+
+export const doLogout = () => {
+  return axios.post(`/api/v1/auth/logout`);
+};

@@ -1,10 +1,11 @@
 import { fetchAccount } from "@/services/api";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { BeatLoader } from "react-spinners";
 
 interface IAppContext {
   isAuthenticated: boolean;
   setIsAuthenticated: (value: boolean) => void;
-  setUser: (value: IUser) => void;
+  setUser: (value: IUser | null) => void;
   user: IUser | null;
   isAppLoading: boolean;
   setAppLoading: (value: boolean) => void;
@@ -22,7 +23,6 @@ export const Provider = (props: IProps) => {
 
   useEffect(() => {
     const fetch = async () => {
-      //   setAppLoading(true);
       const res = await fetchAccount();
 
       if (res && res.data) {
@@ -45,7 +45,20 @@ export const Provider = (props: IProps) => {
         setAppLoading,
       }}
     >
-      {props.children}
+      {isAppLoading === true ? (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <BeatLoader size={20} />
+        </div>
+      ) : (
+        props.children
+      )}
     </CurrentUserContext.Provider>
   );
 };
