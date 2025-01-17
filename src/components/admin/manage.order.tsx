@@ -1,4 +1,2 @@
-const ManageOrder = () => {
-  return <>ManageOrder</>;
-};
+const ManageOrder = () => {};
 export default ManageOrder;

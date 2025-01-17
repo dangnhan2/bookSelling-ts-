@@ -16,7 +16,7 @@ const RegisterPage = () => {
   const { message, notification } = App.useApp();
   const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
     const { fullName, password, email, phone } = values;
-    const res = await doRegister(fullName!, password!, email!, phone!);
+    const res = await doRegister(fullName!, email!, password!, phone!);
     if (res && res.data) {
       navigate("/login");
       message.success("Đăng ký thành công");
@@ -73,10 +73,11 @@ const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item<FieldType>
-                label="Password"
+                label="Email"
                 name="email"
                 rules={[
                   { required: true, message: "Email không được để trống!" },
+                  { type: "email", message: "Email không đúng định dạng" },
                 ]}
               >
                 <Input />

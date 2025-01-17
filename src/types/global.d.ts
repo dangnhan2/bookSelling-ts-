@@ -1,11 +1,12 @@
 export {};
+import { UploadRequestOption as RcCustomRequestOptions } from "rc-upload/lib/interface";
 
 declare global {
   interface IBackendRes<T> {
     error?: string | string[];
     message: string;
     statusCode: number | string;
-    data?: T;
+    data?: T | Array<string>;
   }
 
   interface IModelPaginate<T> {
@@ -15,7 +16,7 @@ declare global {
       pages: number;
       total: number;
     };
-    results: T[];
+    result: T[];
   }
 
   interface ILogin {
@@ -41,5 +42,45 @@ declare global {
 
   interface IFetchAccount {
     user: IUser;
+  }
+
+  interface IUserTable {
+    _id: string;
+    email: string;
+    phone: string;
+    fullName: string;
+    role: string;
+    avatar: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+  }
+
+  interface IBookTable {
+    _id: string;
+    thumbnail: string;
+    slider: Array<string>;
+    mainText: string;
+    author: string;
+    price: number;
+    sold: number;
+    quantity: number;
+    category: string;
+    createdAt: string;
+    updatedAt: string;
+  }
+
+  interface IUserBulk {
+    countSuccess: number;
+    countError: number;
+    detail: string;
+  }
+
+  interface IUserUpdate {
+    acknowledged: boolean;
+    modifiedCount: number;
+    upsertedId: null;
+    upsertedCount: number;
+    matchedCount: number;
   }
 }

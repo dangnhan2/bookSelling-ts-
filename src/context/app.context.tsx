@@ -24,9 +24,9 @@ export const Provider = (props: IProps) => {
   useEffect(() => {
     const fetch = async () => {
       const res = await fetchAccount();
-
+      // console.log(res);
       if (res && res.data) {
-        setUser(res.data);
+        setUser(res.data.user);
         setIsAuthenticated(true);
       }
       setAppLoading(false);
