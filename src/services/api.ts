@@ -161,3 +161,11 @@ export const doUpdateBook = (
 export const doDeleteBook = (id: string) => {
   return axios.delete<IBackendRes<IUserUpdate>>(`/api/v1/book/${id}`);
 };
+
+export const getBookById = (id: string) => {
+  return axios.get<IBackendRes<IBookTable>>(`/api/v1/book/${id}`, {
+    headers: {
+      delay: 3000,
+    },
+  });
+};

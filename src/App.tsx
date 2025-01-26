@@ -27,7 +27,7 @@ function App() {
           element: <AboutPage />,
         },
         {
-          path: "/book",
+          path: "/book/:id",
           element: <BookPage />,
         },
       ],

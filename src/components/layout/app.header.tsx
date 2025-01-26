@@ -12,9 +12,8 @@ import {
   type GetProps,
 } from "antd";
 import { IoCartOutline } from "react-icons/io5";
-import "styles/header.scss";
+import "styles/app.header.scss";
 import { doLogout } from "@/services/api";
-import { useState } from "react";
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -75,7 +74,7 @@ const AppHeader = () => {
     <>
       <>
         <div className="container">
-          <div className="container_brand">
+          <div className="container_brand" onClick={() => navigate("/")}>
             <img src={logo} alt="Logo" />
             <span className="brandname">Happy Shop</span>
           </div>
@@ -135,7 +134,7 @@ const AppHeader = () => {
             </Dropdown>
           )}
         </div>
-
+        <div style={{ margin: "15px 0" }}></div>
         <Outlet></Outlet>
       </>
     </>
